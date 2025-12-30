@@ -1,4 +1,10 @@
-// Update the CORS section in server.js to:
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware - CORS configuration AFTER app is created
 app.use(cors({
     origin: [
         'http://localhost:3000',
@@ -10,15 +16,6 @@ app.use(cors({
     methods: ['GET', 'POST'],
     credentials: true
 }));
-
-const express = require('express');
-const cors = require('cors');
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(cors());
 app.use(express.json());
 
 // ============================================
@@ -241,6 +238,4 @@ app.get('/api/health', (req, res) => {
 // Start server
 app.listen(PORT, () => {
     console.log(`🚀 Pay Commission API Server running on port ${PORT}`);
-    console.log(`📡 API URL: http://localhost:${PORT}/api`);
-    console.log(`✅ Health check: http://localhost:${PORT}/api/health`);
 });
